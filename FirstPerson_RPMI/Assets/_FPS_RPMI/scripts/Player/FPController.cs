@@ -14,9 +14,9 @@ public class FPController : MonoBehaviour
 
     [Header("Jump & GroundCheck")]
     [SerializeField] float jumpForce = 5f;
-    [SerializeField] Transform groundCheck;
     [SerializeField] bool isGrounded;
-    [SerializeField] float grounfCheckRadius = 0.3f;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundCheckRadius = 0.3f;
     [SerializeField] LayerMask groundLayer;
 
     [Header("Player State Bools")]
@@ -52,8 +52,8 @@ public class FPController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Groundcheck
-        isGrounded = Physics.CheckSphere(groundCheck.position, grounfCheckRadius, groundLayer);
+        //GroundCheck
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     private void FixedUpdate()
@@ -68,9 +68,9 @@ public class FPController : MonoBehaviour
 
     void CameraLook()
     {
-        //Rotacion del personaje (horizontal)
+        //Rotación del personaje (horizontal)
         transform.Rotate(Vector3.up * lookInput.x * sensitivity);
-        //Rotacion de la camera (vertical)
+        //Rotación de la cámara (vertical)
         lookRotation += (-lookInput.y * sensitivity);
         lookRotation = Mathf.Clamp(lookRotation, -90, 90);
         camHolder.transform.localEulerAngles = new Vector3(lookRotation, 0f, 0f);
@@ -78,25 +78,25 @@ public class FPController : MonoBehaviour
 
     void Movement()
     {
-        //Definir los dos vectores que permitir la acerleracion
+        //Definir los dos vectores que permiten la aceleración
         Vector3 currentVelocity = rb.linearVelocity;
         Vector3 targetVelocity = new Vector3(moveInput.x, 0, moveInput.y);
-        //A la direccion a alanzar le multiplicamos la velocidad
+        //A la dirección a alcanzar le multiplicamos la velocidad
         targetVelocity *= isCrouching ? crouchSpeed : isSprinting ? sprintSpeed : speed;
-
-        //Convertir la dirccion al eje mundial (local -> world)
+        
+        //Convertir la dirección al eje mundial (Local -> World)
         targetVelocity = transform.TransformDirection(targetVelocity);
 
-        //Calcular el cambio de velocidad (aceleracion)
+        //Calcular el cambio de velocidad (aceleración)
         Vector3 velocityChange = (targetVelocity - currentVelocity);
         velocityChange = new Vector3(velocityChange.x, 0, velocityChange.z);
         velocityChange = Vector3.ClampMagnitude(velocityChange, maxForce);
 
-        //Aplicacion del movimiento (DIRECCION + ACELERACION)
+        //Aplicación del movimiento (DIRECCIÓN + ACELERACIÓN)
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
-    void Jump ()
+    void Jump()
     {
         if (isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
@@ -112,7 +112,7 @@ public class FPController : MonoBehaviour
     }
     public void OnJump(InputAction.CallbackContext context)
     {
-        Jump();
+        if (context.performed) Jump();
     }
     public void OnCrouch(InputAction.CallbackContext context)
     {

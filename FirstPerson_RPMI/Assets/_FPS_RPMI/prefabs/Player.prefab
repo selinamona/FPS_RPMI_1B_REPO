@@ -31,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5325246552618183382}
   m_Father: {fileID: 400383574673103366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2984630494821009809
@@ -181,11 +182,12 @@ GameObject:
   - component: {fileID: 8838758385225423675}
   - component: {fileID: 7568164182131414538}
   - component: {fileID: 7503256075458095414}
-  - component: {fileID: 2617054887898512839}
-  - component: {fileID: 2882247105680817377}
-  m_Layer: 0
+  - component: {fileID: 8326512467102397523}
+  - component: {fileID: 1568735428086453927}
+  - component: {fileID: 7506814066292005754}
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +286,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2617054887898512839}
+      - m_Target: {fileID: 8326512467102397523}
         m_TargetAssemblyTypeName: FPController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -300,7 +302,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2617054887898512839}
+      - m_Target: {fileID: 8326512467102397523}
         m_TargetAssemblyTypeName: FPController, Assembly-CSharp
         m_MethodName: OnLook
         m_Mode: 0
@@ -316,7 +318,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2617054887898512839}
+      - m_Target: {fileID: 8326512467102397523}
         m_TargetAssemblyTypeName: FPController, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -331,16 +333,40 @@ MonoBehaviour:
     m_ActionId: 031ec07e-a710-4a82-a9fc-539c4938886b
     m_ActionName: 'Gameplay/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7506814066292005754}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1e4dfea3-c26e-413b-ba2a-43c9e84a7d01
     m_ActionName: 'Gameplay/Shoot[/Mouse/leftButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7506814066292005754}
+        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: db208920-d288-4bc3-b5bf-53e2f662a1ee
     m_ActionName: 'Gameplay/Reload[/Keyboard/r]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2617054887898512839}
+      - m_Target: {fileID: 8326512467102397523}
         m_TargetAssemblyTypeName: FPController, Assembly-CSharp
         m_MethodName: OnCrouch
         m_Mode: 0
@@ -356,7 +382,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Crouch[/Keyboard/shift]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2617054887898512839}
+      - m_Target: {fileID: 8326512467102397523}
         m_TargetAssemblyTypeName: FPController, Assembly-CSharp
         m_MethodName: OnSprint
         m_Mode: 0
@@ -375,7 +401,7 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2617054887898512839
+--- !u!114 &8326512467102397523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -394,15 +420,15 @@ MonoBehaviour:
   maxForce: 1
   sensitivity: 0.1
   jumpForce: 5
-  groundCheck: {fileID: 2926625067323979733}
   isGrounded: 0
-  grounfCheckRadius: 0.3
+  groundCheck: {fileID: 2926625067323979733}
+  groundCheckRadius: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   isSprinting: 0
   isCrouching: 0
---- !u!95 &2882247105680817377
+--- !u!95 &1568735428086453927
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -412,7 +438,7 @@ Animator:
   m_GameObject: {fileID: 5389455599654763261}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4b84363412e2e64c93023a0152a3869, type: 2}
+  m_Controller: {fileID: 9100000, guid: ecd0e6bed1d6bd14694bdf93b5f8d844, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -424,6 +450,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7506814066292005754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389455599654763261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b9509e17bff9d468a1a252053944f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunSystem
+  fpsCam: {fileID: 2984630494821009809}
+  shootPoint: {fileID: 0}
+  impactLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damage: 10
+  range: 100
+  spread: 0
+  shootingCooldown: 0.2
+  reloadTime: 1.5
+  allowButtonHold: 0
+  ammoSize: 30
+  bulletsPerTap: 1
+  bulletsLeft: 0
+  impactEffect: {fileID: 0}
+  shooting: 0
+  canShoot: 0
+  reloading: 0
 --- !u!1 &7556638209252100877
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,3 +511,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2204288637280463302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5651361102577225021
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6582218194578085717}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.306
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.167
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.512
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.20102847
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.97958547
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 156.806
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+--- !u!4 &5325246552618183382 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eae52f470b72b8d4b80898466b19496b, type: 3}
+  m_PrefabInstance: {fileID: 5651361102577225021}
+  m_PrefabAsset: {fileID: 0}
